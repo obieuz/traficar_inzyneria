@@ -2,28 +2,55 @@ import {Car} from "@/assets/types";
 import {StyleSheet, View, Image, Text, TouchableOpacity} from "react-native";
 import {cars} from "@/assets/data";
 import {useRouter} from "expo-router";
+import MapView, {Marker} from "react-native-maps";
+import useUserLocation from "@/hooks/useUserLocation";
+import {useEffect} from "react";
 
 
 
 export default function Cars() {
     let router = useRouter();
-
+    const {location,errorMsg}=useUserLocation();
+    useEffect(() => {
+        console.log(location)
+    }, [location]);
     return (
         <View style={style.page}>
-            {cars.map((car: Car) => (
-                <TouchableOpacity
-                    key={car.id}
-                    style={style.car_row}
+            {location && <MapView
+                style={style.map}
+                initialRegion={
+                    {
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }
+                }
+            >
+                <Marker
+                    coordinate={{
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
+                    }}
+                    title="Your Location"
+                />
 
-                    onPress={()=>router.push({pathname:"/car_details", params : {carId: car.id}})}>
-                    <Image source={car.img} style={style.car_image}/>r
+                {cars.map((car:Car) => {
+                    return <Marker
+                        key={car.id}
+                        coordinate={{
+                            latitude: Number(car.latitude),
+                            longitude: Number(car.longitude),
+                        }}
+                        title={`${car.manufacturer} ${car.model}`}
+                    >
+                        <TouchableOpacity >
+                            <Image source={car.img} style={{width: 32, height: 32}}/>
+                        </TouchableOpacity>
+                    </Marker>
+                })}
 
-                    <View style={style.car_text}>
-                        <Text>{car.manufacturer} {car.model}</Text>
-                        <Text>{car.price}zł/km</Text>
-                    </View>
-                </TouchableOpacity>
-            ))}
+            </MapView> }
         </View>
     );
 }
@@ -46,5 +73,9 @@ const style = StyleSheet.create({
     car_text:{
         display:"flex",
         padding:5,
+    },
+    map:{
+        width:"100%",
+        height:"100%",
     }
 })
