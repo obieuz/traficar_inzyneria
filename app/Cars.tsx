@@ -14,27 +14,44 @@ export default function Cars() {
     const {location,errorMsg}=useUserLocation();
     const[carId,setCarId]=useState<number|null>(null);
     const[showDetails, setShowDetails]=useState<boolean>(false);
+    const [region, setRegion] = useState({
+        //kordy lacznosci jako poczatkowe
+        latitude: 54.353306,
+        longitude: 18.652556,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+    });
+
+    useEffect(() => {
+        if(location == null) {
+            return;
+        }
+
+        setRegion({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+        })
+
+
+    }, [location]);
 
     return (
         <View style={style.page}>
-            {location && <MapView
+            <MapView
                 style={style.map}
-                initialRegion={
-                    {
-                        latitude: location.coords.latitude,
-                        longitude: location.coords.longitude,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }
-                }
+                region={region}
             >
                 <Marker
                     coordinate={{
-                        latitude: location.coords.latitude,
-                        longitude: location.coords.longitude,
+                        latitude: region.latitude,
+                        longitude: region.longitude,
                     }}
                     title="Your Location"
-                />
+                >
+                    <Image source={require("../assets/images/user_location_icon.png")} style={{objectFit:"contain"}}/>
+                </Marker>
 
                 {cars.map((car:Car) => {
                     return <Marker
@@ -54,7 +71,7 @@ export default function Cars() {
                     </Marker>
                 })}
 
-            </MapView> }
+            </MapView>
 
             {showDetails && <CarBasicInfo carId={carId}/>}
 
@@ -67,7 +84,6 @@ const style = StyleSheet.create({
         position:"relative",
         width:"100%",
         display:"flex",
-        padding:10,
     },
     car_row:{
         display:"flex",

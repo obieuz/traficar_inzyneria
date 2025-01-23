@@ -7,6 +7,7 @@ export type Car = {
     img: ImageSourcePropType;
     img_require : ImageRequireSource;
     latitude : string;
+    available : boolean;
     longitude : string;
     price: number;
     };
