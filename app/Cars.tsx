@@ -4,16 +4,17 @@ import {cars} from "@/assets/data";
 import {useRouter} from "expo-router";
 import MapView, {Marker} from "react-native-maps";
 import useUserLocation from "@/hooks/useUserLocation";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import CarBasicInfo from "@/components/CarBasicInfo";
 
 
 
 export default function Cars() {
     let router = useRouter();
     const {location,errorMsg}=useUserLocation();
-    useEffect(() => {
-        console.log(location)
-    }, [location]);
+    const[carId,setCarId]=useState<number|null>(null);
+    const[showDetails, setShowDetails]=useState<boolean>(false);
+
     return (
         <View style={style.page}>
             {location && <MapView
@@ -43,20 +44,28 @@ export default function Cars() {
                             longitude: Number(car.longitude),
                         }}
                         title={`${car.manufacturer} ${car.model}`}
+                        onPress={()=>{
+                            console.log(car.id);
+                            setCarId(car.id);
+                            setShowDetails(true)
+                        }}
                     >
-                        <TouchableOpacity >
-                            <Image source={car.img} style={{width: 32, height: 32}}/>
-                        </TouchableOpacity>
+                        <Image source={car.img} style={{width: 32, height: 32}}/>
                     </Marker>
                 })}
 
             </MapView> }
+
+            {showDetails && <CarBasicInfo carId={carId}/>}
+
         </View>
     );
 }
 
 const style = StyleSheet.create({
     page:{
+        position:"relative",
+        width:"100%",
         display:"flex",
         padding:10,
     },
