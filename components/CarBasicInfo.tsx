@@ -2,6 +2,7 @@ import {View, Text, Image, StyleSheet, Button, TouchableOpacity} from "react-nat
 import {cars} from "@/assets/data";
 import {background_color} from "@/assets/colors";
 import {useRouter} from "expo-router";
+import {Clickable_Icon} from "@/components/Clickable_Icon";
 
 export default function CarBasicInfo({carId,setShowDetails})
 {
@@ -10,12 +11,11 @@ export default function CarBasicInfo({carId,setShowDetails})
     return (
         <View style={styles.component}>
             <View>
-                <TouchableOpacity
+                <Clickable_Icon
                     onPress={() => setShowDetails(false)}
-                    style={styles.close_button_container}
-                >
-                    <Image source={require("@/assets/images/icons/close_icon.png")} style={{width:32,height:32}}/>
-                </TouchableOpacity>
+                    style={close_button_styles}
+                    path_to_icon_img={require("@/assets/images/icons/close_icon.png")}
+                />
             </View>
         {car && <View>
             <View style={styles.row}>
@@ -26,6 +26,8 @@ export default function CarBasicInfo({carId,setShowDetails})
                 </View>
             </View>
             <Button title={"See details"}
+                    // aby car_details wiedzialo o jakim samochodzie mowimy daje w parametrach carId
+                {/*znak zapytania na chlopski rozum mowi ze wiesz ze moze byc undefined wiec chronisz przed branem czegos co nie istnieje*/}
                 onPress={()=>router.push({pathname:"car_details",params:{carId:car?.id}})}
             />
             <Button title={"Order"}
@@ -65,9 +67,16 @@ const styles = StyleSheet.create({
         bottom:0,
         zIndex:2,
     },
-    close_button_container:{
+})
+
+const close_button_styles = StyleSheet.create({
+    container:{
         width:"auto",
         marginLeft:"auto",
         marginRight:0,
+    },
+    image:{
+        width:32,
+        height:32,
     }
 })
