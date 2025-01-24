@@ -6,6 +6,7 @@ export default function useUserLocation()
 {
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = useState("");
+    const [refresh,setRefresh] = useState(0);
     useEffect(() => {
         (async () => {
             let {status} = await Location.requestForegroundPermissionsAsync();
@@ -17,6 +18,6 @@ export default function useUserLocation()
             let location = await Location.getCurrentPositionAsync({})
             setLocation(location);
         })();
-    }, []);
-    return {location, errorMsg};
+    }, [refresh]);
+    return {location, errorMsg,refresh, setRefresh};
 }

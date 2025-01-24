@@ -6,14 +6,17 @@ import MapView, {Marker} from "react-native-maps";
 import useUserLocation from "@/hooks/useUserLocation";
 import {useEffect, useState} from "react";
 import CarBasicInfo from "@/components/CarBasicInfo";
+import {Icon} from "@/components/Icon";
 
 
 
 export default function Cars() {
     let router = useRouter();
-    const {location,errorMsg}=useUserLocation();
+    let {location,errorMsg,refresh,setRefresh}=useUserLocation();
     const[carId,setCarId]=useState<number|null>(null);
     const[showDetails, setShowDetails]=useState<boolean>(false);
+
+
     const [region, setRegion] = useState({
         //kordy lacznosci jako poczatkowe
         latitude: 54.353306,
@@ -39,19 +42,30 @@ export default function Cars() {
 
     return (
         <View style={style.page}>
+
+            <Icon
+                path_to_icon_img={require("@/assets/images/icons/localization_user_icon.png")}
+                onPress={()=>{
+                    setRefresh(refresh+1);
+                }}
+                style={localization_icon_style}
+            />
+
             <MapView
                 style={style.map}
                 region={region}
             >
-                <Marker
+                {location && <Marker
                     coordinate={{
                         latitude: region.latitude,
                         longitude: region.longitude,
                     }}
                     title="Your Location"
                 >
-                    <Image source={require("../assets/images/user_location_icon.png")} style={{objectFit:"contain"}}/>
+                    <Image source={require("../assets/images/icons/user_location_icon.png")} style={{objectFit:"contain"}}/>
                 </Marker>
+                }
+
 
                 {cars.map((car:Car) => {
                     return <Marker
@@ -62,7 +76,6 @@ export default function Cars() {
                         }}
                         title={`${car.manufacturer} ${car.model}`}
                         onPress={()=>{
-                            console.log(car.id);
                             setCarId(car.id);
                             setShowDetails(true)
                         }}
@@ -73,7 +86,7 @@ export default function Cars() {
 
             </MapView>
 
-            {showDetails && <CarBasicInfo carId={carId}/>}
+            {showDetails && <CarBasicInfo carId={carId} setShowDetails={setShowDetails}/>}
 
         </View>
     );
@@ -102,5 +115,18 @@ const style = StyleSheet.create({
     map:{
         width:"100%",
         height:"100%",
+    }
+})
+
+const localization_icon_style = StyleSheet.create({
+    container:{
+        position:"absolute",
+        left:10,
+        bottom:10,
+        zIndex:1,
+    },
+    image:{
+        width: 32,
+        height: 32,
     }
 })
