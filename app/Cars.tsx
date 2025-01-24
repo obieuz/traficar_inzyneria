@@ -6,7 +6,7 @@ import MapView, {Marker} from "react-native-maps";
 import useUserLocation from "@/hooks/useUserLocation";
 import {useEffect, useState} from "react";
 import CarBasicInfo from "@/components/CarBasicInfo";
-import {Icon} from "@/components/Icon";
+import {Clickable_Icon} from "@/components/Clickable_Icon";
 import {MenuBar} from "@/components/MenuBar";
 
 
@@ -44,10 +44,10 @@ export default function Cars() {
 
     return (
         <View style={style.page}>
-
+            {/* jezeli showMenu rowna sie true, wtedy i tylko wtedy pokazuje sie MenuBar*/}
             {showMenu && <MenuBar/>}
 
-            <Icon
+            <Clickable_Icon
                 path_to_icon_img={require("@/assets/images/icons/localization_user_icon.png")}
                 onPress={()=>{
                     setRefresh(refresh+1);
@@ -55,7 +55,7 @@ export default function Cars() {
                 style={localization_icon_style}
             />
 
-            <Icon
+            <Clickable_Icon
                 path_to_icon_img={require("@/assets/images/icons/ham_menu_icon.png")}
                 onPress={()=>{
                     setShowMenu(!showMenu)
@@ -67,6 +67,7 @@ export default function Cars() {
                 style={style.map}
                 region={region}
             >
+                {/*location na poczatku jest null wiec bylby blad gdybym probowal cos z nia robic, wiec tylko gdy location bedzie istniala wyswitli mi lokalizacje usera*/}
                 {location && <Marker
                     coordinate={{
                         latitude: region.latitude,
@@ -78,7 +79,7 @@ export default function Cars() {
                 </Marker>
                 }
 
-
+                {/*dla kazdego samochodu tworzy sie Marker czyli znacznik na mapie*/}
                 {cars.map((car:Car) => {
                     return <Marker
                         key={car.id}
@@ -88,6 +89,7 @@ export default function Cars() {
                         }}
                         title={`${car.manufacturer} ${car.model}`}
                         onPress={()=>{
+                            //to sa huki do komponentu carbasicinfo, carid aby wiedzialo ktory, showdetails zeby pokazywalo wtedy tylko user kliknie
                             setCarId(car.id);
                             setShowDetails(true)
                         }}
