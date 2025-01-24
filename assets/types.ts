@@ -11,3 +11,10 @@ export type Car = {
     longitude : string;
     price: number;
     };
+
+export type MenuItem = {
+    id:number;
+    text: string;
+    page_to_navigate: string;
+    icon: ImageSourcePropType;
+}

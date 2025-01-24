@@ -7,6 +7,7 @@ import useUserLocation from "@/hooks/useUserLocation";
 import {useEffect, useState} from "react";
 import CarBasicInfo from "@/components/CarBasicInfo";
 import {Icon} from "@/components/Icon";
+import {MenuBar} from "@/components/MenuBar";
 
 
 
@@ -15,6 +16,7 @@ export default function Cars() {
     let {location,errorMsg,refresh,setRefresh}=useUserLocation();
     const[carId,setCarId]=useState<number|null>(null);
     const[showDetails, setShowDetails]=useState<boolean>(false);
+    const[showMenu, setShowMenu]=useState<boolean>(false);
 
 
     const [region, setRegion] = useState({
@@ -43,12 +45,22 @@ export default function Cars() {
     return (
         <View style={style.page}>
 
+            {showMenu && <MenuBar/>}
+
             <Icon
                 path_to_icon_img={require("@/assets/images/icons/localization_user_icon.png")}
                 onPress={()=>{
                     setRefresh(refresh+1);
                 }}
                 style={localization_icon_style}
+            />
+
+            <Icon
+                path_to_icon_img={require("@/assets/images/icons/ham_menu_icon.png")}
+                onPress={()=>{
+                    setShowMenu(!showMenu)
+                }}
+                style={menu_icon_style}
             />
 
             <MapView
@@ -124,6 +136,19 @@ const localization_icon_style = StyleSheet.create({
         left:10,
         bottom:10,
         zIndex:1,
+    },
+    image:{
+        width: 32,
+        height: 32,
+    }
+})
+
+const menu_icon_style = StyleSheet.create({
+    container:{
+        position:"absolute",
+        left:10,
+        top:10,
+        zIndex:4,
     },
     image:{
         width: 32,
