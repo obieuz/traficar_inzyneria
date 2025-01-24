@@ -27,7 +27,7 @@ export default function CarBasicInfo({carId,setShowDetails})
             </View>
             <Button title={"See details"}
                     // aby car_details wiedzialo o jakim samochodzie mowimy daje w parametrach carId
-                {/*znak zapytania na chlopski rozum mowi ze wiesz ze moze byc undefined wiec chronisz przed branem czegos co nie istnieje*/}
+                /*znak zapytania na chlopski rozum mowi ze wiesz ze moze byc undefined wiec chronisz przed branem czegos co nie istnieje*/
                 onPress={()=>router.push({pathname:"car_details",params:{carId:car?.id}})}
             />
             <Button title={"Order"}

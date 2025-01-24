@@ -31,5 +31,11 @@ export const menuItems:MenuItem[] = [
         text:"Orders",
         page_to_navigate:"/index",
         icon: require("./images/icons/close_icon.png")
+    },
+    {
+        id:2,
+        text:"back_to_home",
+        page_to_navigate:"/index.tsx",
+        icon: require("./images/icons/close_icon.png")
     }
 ]

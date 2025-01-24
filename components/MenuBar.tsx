@@ -20,6 +20,7 @@ export const MenuBar = ()=> {
     )
 }
 
+// @ts-ignore
 const style = StyleSheet.create({
     menu_bar:{
         backgroundColor:background_color,
