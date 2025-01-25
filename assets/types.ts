@@ -5,7 +5,6 @@ export type Car = {
     model: string;
     manufacturer: string;
     img: ImageSourcePropType;
-    img_require : ImageRequireSource;
     latitude : string;
     available : boolean;
     longitude : string;
