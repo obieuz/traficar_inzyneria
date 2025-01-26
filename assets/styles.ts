@@ -121,4 +121,8 @@ const styles = StyleSheet.create({
   },
 });
 
+export const icon_width = 48;
+export const icon_height = 48;
+export const icon_color = "black";
+
 export default styles;

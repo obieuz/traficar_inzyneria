@@ -8,10 +8,11 @@ import {useEffect, useState} from "react";
 import CarBasicInfo from "@/components/CarBasicInfo";
 import {Clickable_Icon} from "@/components/Clickable_Icon";
 import {MenuBar} from "@/components/MenuBar";
+import {UserMarker} from "@/components/UserMarker";
 
 
 
-export default function Cars() {
+export default function MapScreen() {
     let router = useRouter();
     let {location,errorMsg,refresh,setRefresh}=useUserLocation();
     const[carId,setCarId]=useState<number|null>(null);
@@ -48,7 +49,7 @@ export default function Cars() {
             {showMenu && <MenuBar/>}
 
             <Clickable_Icon
-                path_to_icon_img={require("@/assets/images/icons/localization_user_icon.png")}
+                path_to_icon_img={require("@/assets/images/icons/user_location_icon.png")}
                 onPress={()=>{
                     setRefresh(refresh+1);
                 }}
@@ -68,19 +69,15 @@ export default function Cars() {
                 region={region}
                 onPress={()=>{
                     setShowMenu(false);
-                }
+                    setShowDetails(false);
+                    }
                 }
             >
                 {/*location na poczatku jest null wiec bylby blad gdybym probowal cos z nia robic, wiec tylko gdy location bedzie istniala wyswitli mi lokalizacje usera*/}
-                {location && <Marker
-                    coordinate={{
-                        latitude: region.latitude,
-                        longitude: region.longitude,
-                    }}
-                    title="Your Location"
-                >
-                    <Image source={require("../assets/images/icons/localization_user_icon.png")} style={{objectFit:"contain"}}/>
-                </Marker>
+                {location && <UserMarker
+                    latitude={region.latitude}
+                    longitude={region.longitude}
+                />
                 }
 
                 {/*dla kazdego samochodu tworzy sie Marker czyli znacznik na mapie*/}
