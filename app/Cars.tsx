@@ -75,7 +75,7 @@ export default function Cars() {
                     }}
                     title="Your Location"
                 >
-                    <Image source={require("../assets/images/icons/user_location_icon.png")} style={{objectFit:"contain"}}/>
+                    <Image source={require("../assets/images/icons/localization_user_icon.png")} style={{objectFit:"contain"}}/>
                 </Marker>
                 }
 

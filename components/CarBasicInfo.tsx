@@ -17,24 +17,24 @@ export default function CarBasicInfo({carId,setShowDetails})
                     path_to_icon_img={require("@/assets/images/icons/close_icon.png")}
                 />
             </View>
-        {car && <View>
-            <View style={styles.row}>
-                <Image source={car.img} style={styles.image}/>
-                <View style={styles.text_in_row}>
-                    <Text style={styles.text_to_right}>{car.manufacturer} {car.model}</Text>
-                    <Text style={styles.text_to_right}>{car.price}</Text>
+            {car && <View>
+                <View style={styles.row}>
+                    <Image source={car.img} style={styles.image}/>
+                    <View style={styles.text_in_row}>
+                        <Text style={styles.text_to_right}>{car.manufacturer} {car.model}</Text>
+                        <Text style={styles.text_to_right}>{car.price}</Text>
+                    </View>
                 </View>
-            </View>
-            <Button title={"See details"}
+                <Button title={"See details"}
                     // aby car_details wiedzialo o jakim samochodzie mowimy daje w parametrach carId
-                /*znak zapytania na chlopski rozum mowi ze wiesz ze moze byc undefined wiec chronisz przed branem czegos co nie istnieje*/
-                onPress={()=>router.push({pathname:"car_details",params:{carId:car?.id}})}
-            />
-            <Button title={"Order"}
-                    onPress={()=>router.push({pathname:"order",params:{carId:car?.id}})}
-                    />
-        </View>
-        }
+                    /*znak zapytania na chlopski rozum mowi ze wiesz ze moze byc undefined wiec chronisz przed branem czegos co nie istnieje*/
+                        onPress={()=>router.push({pathname:"car_details",params:{carId:car?.id}})}
+                />
+                <Button title={"Order"}
+                        onPress={()=>router.push({pathname:"order",params:{carId:car?.id}})}
+                />
+            </View>
+            }
         </View>
     );
 }
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         objectFit:"contain"
     },
     text_in_row : {
-      marginLeft:"auto",
+        marginLeft:"auto",
         marginRight:0,
     },
     text_to_right:{

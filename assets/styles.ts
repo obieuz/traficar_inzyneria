@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   title: {
-    fontSize: 36,
+    fontSize: 72,
     fontWeight: "bold",
     color: "#000",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 36,
     color: "#000",
   },
   priceOld: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer2: {
-    flexDirection: "center",
+    flexDirection: "row",
     justifyContent: "space-between",
     width: "80%",
   },
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      marginCenter: 10,
-      width: "20%r",
+      margin: 10,
+      width: "20%",
     },
 
 

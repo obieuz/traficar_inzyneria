@@ -1,4 +1,5 @@
 import {Car, MenuItem} from "@/assets/types";
+import index from "@/pages/index";;
 
 export const cars:Car[] = [
     {
@@ -35,7 +36,7 @@ export const menuItems:MenuItem[] = [
     {
         id:2,
         text:"back_to_home",
-        page_to_navigate:"/index.tsx",
+        page_to_navigate:"/index",
         icon: require("./images/icons/close_icon.png")
     }
 ]
