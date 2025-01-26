@@ -66,6 +66,10 @@ export default function Cars() {
             <MapView
                 style={style.map}
                 region={region}
+                onPress={()=>{
+                    setShowMenu(false);
+                }
+                }
             >
                 {/*location na poczatku jest null wiec bylby blad gdybym probowal cos z nia robic, wiec tylko gdy location bedzie istniala wyswitli mi lokalizacje usera*/}
                 {location && <Marker
@@ -149,8 +153,8 @@ const menu_icon_style = StyleSheet.create({
     container:{
         position:"absolute",
         left:10,
-        top:10,
-        zIndex:4,
+        top:0,
+        zIndex:2,
     },
     image:{
         width: 32,

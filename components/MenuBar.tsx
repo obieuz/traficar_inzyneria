@@ -5,7 +5,6 @@ import {MenuItem} from "@/assets/types";
 import {background_color} from "@/assets/colors";
 
 export const MenuBar = ()=> {
-    console.log("MenuBar")
     return(
         <View style={style.menu_bar}>
             {menuItems.map((item:MenuItem)=>(
@@ -25,7 +24,7 @@ const style = StyleSheet.create({
     menu_bar:{
         backgroundColor:background_color,
         position:"absolute",
-        paddingTop:42,
+        paddingTop:10,
         paddingLeft:10,
         zIndex:3,
         left:0,
