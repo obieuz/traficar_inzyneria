@@ -1,0 +1,1 @@
+export const location_key = "location_key";

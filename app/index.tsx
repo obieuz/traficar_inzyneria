@@ -7,7 +7,8 @@ import { useRouter } from "expo-router";
 import styles from "../assets/styles"; // Dodaj ten import
 import LoginScreen from "./LoginScreen"; // Dodaj ten import
 import RegisterScreen from "./RegisterScreen"; // Dodaj ten import
-import Cars from "./Cars"; // Dodaj ten import
+import MapScreen from "./MapScreen";
+import {MapScreen_route} from "@/assets/routes"; // Dodaj ten import
 
 export default function Index() {
 const router = useRouter();
@@ -42,7 +43,7 @@ const router = useRouter();
             <View style={styles.buttonContainer2}>
                 <TouchableOpacity
                     style={styles.demobutton}
-                    onPress={() => router.push("Cars")}
+                    onPress={() => router.push(MapScreen_route)}
                 >
                     <Text style={styles.demobuttonText}>Demo</Text>
                 </TouchableOpacity> // skip logowania i rejestracji, przzechodzi do Cars.tsx

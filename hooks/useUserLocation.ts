@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import * as Location from "expo-location";
 import { LocationObject } from "expo-location";
+import {location_key} from "@/functions/keys";
+import {storeData} from "@/functions/storage";
 
 export default function useUserLocation()
 {
@@ -17,6 +19,8 @@ export default function useUserLocation()
             }
             //bierze aktualna lokalizacje
             let location = await Location.getCurrentPositionAsync({})
+            //zapisuje lokalizacje w pamieci aplikacji, json.stringify zamienia obiekt na string
+            await storeData(location_key, JSON.stringify(location));
             setLocation(location);
         })();
         //use effect zalezy od refresh, wiec jak refresh sie zmieni to useEffect zostanie wykonany ponownie
