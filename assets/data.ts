@@ -43,6 +43,27 @@ export const cars:Car[] = [
         number_of_seats: 5,
         number_of_doors: 3,
 
+    },
+    {
+        id: 3,
+        model: "Urus",
+        manufacturer: "Lamborghini",
+        img: require("./images/cars/urus.png"),
+        latitude : "54.518708",
+        longitude : "18.556093",
+        range : 300,
+        available: true,
+        price: 6.99,
+        horse_power: 650,
+        fuel_type: "petrol",
+        gearbox: "automatic",
+        cubic_capacity: 3996,
+        mileage: 10000,
+        color: "yellow",
+        year: 2021,
+        registration_number: "GDA67890",
+        number_of_seats: 5,
+        number_of_doors: 5,
     }
 ]
 
@@ -58,5 +79,20 @@ export const menuItems:MenuItem[] = [
         text:"back_to_home",
         page_to_navigate:"/index",
         icon: require("./images/icons/close_icon.png")
+    }
+]
+
+export const regions = [
+    {
+        id: 1,
+        carIds: [1,2],
+        latitude: 54.34,
+        longitude: 18.638306,
+    },
+    {
+        id: 2,
+        carIds: [3],
+        latitude: 54.518328,
+        longitude: 18.529379,
     }
 ]

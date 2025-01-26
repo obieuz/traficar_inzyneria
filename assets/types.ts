@@ -28,3 +28,10 @@ export type MenuItem = {
     page_to_navigate: string;
     icon: ImageSourcePropType;
 }
+
+export type Region = {
+    id:number;
+    carIds:number[];
+    latitude: number;
+    longitude: number;
+}
