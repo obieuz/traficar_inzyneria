@@ -1,0 +1,1 @@
+export const zoomLevel_barrier = 11;

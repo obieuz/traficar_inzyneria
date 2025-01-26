@@ -60,7 +60,9 @@ export default function CarBasicInfo({carId})
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.button_container}>
+                <TouchableOpacity style={styles.button_container}
+                    onPress={() => router.push({pathname: CarDetailsScreen_route, params: {carId: car.id}})}
+                >
                     <Text style={styles.button_text}>SEE DETAILS</Text>
                 </TouchableOpacity>
 
