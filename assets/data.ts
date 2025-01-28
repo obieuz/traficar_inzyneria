@@ -36,5 +36,35 @@ export const menuItems:MenuItem[] = [
         text:"back_to_home",
         page_to_navigate:"/index",
         icon: require("./images/icons/close_icon.png")
+    },
+    {
+        id:3,
+        text:"Portfel",
+        page_to_navigate:"/wallet",
+        icon: require("./images/icons/settings.png")
+    },
+    {
+        id:4,
+        text:"Historia przejazdów",
+        page_to_navigate:"/history",
+        icon: require("./images/icons/history.png")
+    },
+    {
+        id:5,
+        text:"Ustawienia",
+        page_to_navigate:"/settings",
+        icon: require("./images/icons/settings.png")
+    },
+    {
+        id:6,
+        text:"Pomoc",
+        page_to_navigate:"/help",
+        icon: require("./images/icons/help.png")
+    },
+    {
+        id:7,
+        text:"Wyloguj",
+        page_to_navigate:"/logout",
+        icon: require("./images/icons/close_icon.png")
     }
 ]
