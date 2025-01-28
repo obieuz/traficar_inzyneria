@@ -1,6 +1,5 @@
 import {View, Image, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {useRouter} from "expo-router";
-import page_to_navigate from "@/assets/data";
 
 export const MenuListItem = ({icon,text,page_to_navigate})=>{
     const router = useRouter();
