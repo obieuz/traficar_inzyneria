@@ -35,3 +35,12 @@ export type Region = {
     latitude: number;
     longitude: number;
 }
+
+export type User = {
+    id:number;
+    name: string;
+    surname: string;
+    history: any[];
+    login: string;
+    password: string;
+}

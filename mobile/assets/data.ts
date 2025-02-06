@@ -1,4 +1,4 @@
-import {Car, MenuItem} from "@/assets/types";
+import {Car, MenuItem, Region, User} from "@/assets/types";
 
 export const cars:Car[] = [
     {
@@ -112,7 +112,7 @@ export const menuItems:MenuItem[] = [
     }
 ]
 
-export const regions = [
+export const regions : Region[] = [
     {
         id: 1,
         carIds: [1,2],
@@ -124,5 +124,24 @@ export const regions = [
         carIds: [3],
         latitude: 54.518328,
         longitude: 18.529379,
+    }
+]
+
+export const users:User []= [
+    {
+        id:0,
+        name: "Robert",
+        surname: "Zajac",
+        history: [],
+        login: "robzaj",
+        password: "robzaj"
+    },
+    {
+        id:1,
+        name: "Kamil",
+        surname: "Kowalski",
+        history: [],
+        login: "kamkow",
+        password: "kamkow"
     }
 ]

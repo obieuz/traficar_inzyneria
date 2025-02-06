@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: "80%",
+    justifyContent:"center",
+    width: "100%",
   },
 
   buttonContainer2: {

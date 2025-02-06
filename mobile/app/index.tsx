@@ -26,12 +26,12 @@ const router = useRouter();
             <View style={styles.buttonContainer}>
 
 
-                <TouchableOpacity
-                    style={styles.createAccountButton}
-                    onPress={() => router.push("RegisterScreen")}
-                >
-                    <Text style={styles.createAccountText}>Stwórz konto</Text>
-                </TouchableOpacity>
+                {/*<TouchableOpacity*/}
+                {/*    style={styles.createAccountButton}*/}
+                {/*    onPress={() => router.push("RegisterScreen")}*/}
+                {/*>*/}
+                {/*    <Text style={styles.createAccountText}>Stwórz konto</Text>*/}
+                {/*</TouchableOpacity>*/}
                 <TouchableOpacity
                     style={styles.loginButton}
                     onPress={() => router.push("LoginScreen")}
@@ -40,14 +40,14 @@ const router = useRouter();
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.buttonContainer2}>
-                <TouchableOpacity
-                    style={styles.demobutton}
-                    onPress={() => router.push(MapScreen_route)}
-                >
-                    <Text style={styles.demobuttonText}>Demo</Text>
-                </TouchableOpacity> // skip logowania i rejestracji, przzechodzi do Cars.tsx
-            </View>
+            {/*<View style={styles.buttonContainer2}>*/}
+            {/*    /!*<TouchableOpacity*!/*/}
+            {/*    /!*    style={styles.demobutton}*!/*/}
+            {/*    /!*    onPress={() => router.push(MapScreen_route)}*!/*/}
+            {/*    /!*>*!/*/}
+            {/*    /!*    <Text style={styles.demobuttonText}>Demo</Text>*!/*/}
+            {/*    /!*</TouchableOpacity> // skip logowania i rejestracji, przzechodzi do Cars.tsx*!/*/}
+            {/*</View>*/}
         </View>
     );
 };
