@@ -2,10 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.2
--- Dumped by pg_dump version 17.2
-
--- Started on 2025-02-06 19:00:21 UTC
+-- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
+-- Dumped by pg_dump version 17.2 (Debian 17.2-1.pgdg120+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,8 +22,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 222 (class 1259 OID 16408)
--- Name: cars; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cars; Type: TABLE; Schema: public; Owner: root
 --
 
 CREATE TABLE public.cars (
@@ -54,11 +51,10 @@ CREATE TABLE public.cars (
 );
 
 
-ALTER TABLE public.cars OWNER TO postgres;
+ALTER TABLE public.cars OWNER TO root;
 
 --
--- TOC entry 221 (class 1259 OID 16407)
--- Name: cars_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cars_id_seq; Type: SEQUENCE; Schema: public; Owner: root
 --
 
 CREATE SEQUENCE public.cars_id_seq
@@ -70,20 +66,17 @@ CREATE SEQUENCE public.cars_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.cars_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.cars_id_seq OWNER TO root;
 
 --
--- TOC entry 3390 (class 0 OID 0)
--- Dependencies: 221
--- Name: cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
 --
 
 ALTER SEQUENCE public.cars_id_seq OWNED BY public.cars.id;
 
 
 --
--- TOC entry 220 (class 1259 OID 16399)
--- Name: regions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: regions; Type: TABLE; Schema: public; Owner: root
 --
 
 CREATE TABLE public.regions (
@@ -94,11 +87,10 @@ CREATE TABLE public.regions (
 );
 
 
-ALTER TABLE public.regions OWNER TO postgres;
+ALTER TABLE public.regions OWNER TO root;
 
 --
--- TOC entry 219 (class 1259 OID 16398)
--- Name: regions_regionid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: regions_regionid_seq; Type: SEQUENCE; Schema: public; Owner: root
 --
 
 CREATE SEQUENCE public.regions_regionid_seq
@@ -110,20 +102,17 @@ CREATE SEQUENCE public.regions_regionid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.regions_regionid_seq OWNER TO postgres;
+ALTER SEQUENCE public.regions_regionid_seq OWNER TO root;
 
 --
--- TOC entry 3391 (class 0 OID 0)
--- Dependencies: 219
--- Name: regions_regionid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: regions_regionid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
 --
 
 ALTER SEQUENCE public.regions_regionid_seq OWNED BY public.regions.regionid;
 
 
 --
--- TOC entry 218 (class 1259 OID 16390)
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
+-- Name: users; Type: TABLE; Schema: public; Owner: root
 --
 
 CREATE TABLE public.users (
@@ -136,11 +125,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE public.users OWNER TO root;
 
 --
--- TOC entry 217 (class 1259 OID 16389)
--- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: root
 --
 
 CREATE SEQUENCE public.users_userid_seq
@@ -152,45 +140,38 @@ CREATE SEQUENCE public.users_userid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_userid_seq OWNER TO postgres;
+ALTER SEQUENCE public.users_userid_seq OWNER TO root;
 
 --
--- TOC entry 3392 (class 0 OID 0)
--- Dependencies: 217
--- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
 --
 
 ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
--- TOC entry 3222 (class 2604 OID 16411)
--- Name: cars id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: cars id; Type: DEFAULT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.cars ALTER COLUMN id SET DEFAULT nextval('public.cars_id_seq'::regclass);
 
 
 --
--- TOC entry 3221 (class 2604 OID 16402)
--- Name: regions regionid; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: regions regionid; Type: DEFAULT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.regions ALTER COLUMN regionid SET DEFAULT nextval('public.regions_regionid_seq'::regclass);
 
 
 --
--- TOC entry 3220 (class 2604 OID 16393)
--- Name: users userid; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: users userid; Type: DEFAULT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.users_userid_seq'::regclass);
 
 
 --
--- TOC entry 3384 (class 0 OID 16408)
--- Dependencies: 222
--- Data for Name: cars; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: cars; Type: TABLE DATA; Schema: public; Owner: root
 --
 
 COPY public.cars (id, model, manufacturer, img, latitude, longitude, range, available, price, horse_power, fuel_type, gearbox, cubic_capacity, mileage, color, year, registration_number, number_of_seats, number_of_doors) FROM stdin;
@@ -201,9 +182,7 @@ COPY public.cars (id, model, manufacturer, img, latitude, longitude, range, avai
 
 
 --
--- TOC entry 3382 (class 0 OID 16399)
--- Dependencies: 220
--- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: root
 --
 
 COPY public.regions (regionid, carids, latitude, longitude) FROM stdin;
@@ -213,9 +192,7 @@ COPY public.regions (regionid, carids, latitude, longitude) FROM stdin;
 
 
 --
--- TOC entry 3380 (class 0 OID 16390)
--- Dependencies: 218
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: root
 --
 
 COPY public.users (userid, name, surname, history, login, password) FROM stdin;
@@ -225,35 +202,28 @@ COPY public.users (userid, name, surname, history, login, password) FROM stdin;
 
 
 --
--- TOC entry 3393 (class 0 OID 0)
--- Dependencies: 221
--- Name: cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
 SELECT pg_catalog.setval('public.cars_id_seq', 1, false);
 
 
 --
--- TOC entry 3394 (class 0 OID 0)
--- Dependencies: 219
--- Name: regions_regionid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: regions_regionid_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
 SELECT pg_catalog.setval('public.regions_regionid_seq', 1, false);
 
 
 --
--- TOC entry 3395 (class 0 OID 0)
--- Dependencies: 217
--- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
 SELECT pg_catalog.setval('public.users_userid_seq', 1, false);
 
 
 --
--- TOC entry 3231 (class 2606 OID 16418)
--- Name: cars cars_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cars cars_pkey; Type: CONSTRAINT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.cars
@@ -261,8 +231,7 @@ ALTER TABLE ONLY public.cars
 
 
 --
--- TOC entry 3233 (class 2606 OID 16420)
--- Name: cars cars_registration_number_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cars cars_registration_number_key; Type: CONSTRAINT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.cars
@@ -270,8 +239,7 @@ ALTER TABLE ONLY public.cars
 
 
 --
--- TOC entry 3229 (class 2606 OID 16406)
--- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.regions
@@ -279,15 +247,12 @@ ALTER TABLE ONLY public.regions
 
 
 --
--- TOC entry 3227 (class 2606 OID 16397)
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (userid);
 
-
--- Completed on 2025-02-06 19:00:23 UTC
 
 --
 -- PostgreSQL database dump complete

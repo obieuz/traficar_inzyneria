@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./db
+
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: traficar
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql
