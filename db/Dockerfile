@@ -6,7 +6,7 @@ ENV POSTGRES_PASSWORD=123
 ENV POSTGRES_DB=traficar
 
 # Expose the PostgreSQL port
-EXPOSE 5432
+EXPOSE 5432:5432
 
 # Add a custom initialization script (optional)
 COPY backup.sql /docker-entrypoint-initdb.d/
