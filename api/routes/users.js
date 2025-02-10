@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { pool } = require("../db_connection");
-const {generateToken} = require("../assets");
+const {generateToken} = require("../token_methods");
 const isDatabaseConnected = require("../middlewares/isDatabaseConnected");
 
 router.post("/token",isDatabaseConnected, (req, res, next) => {
@@ -42,4 +42,5 @@ router.post("/token",isDatabaseConnected, (req, res, next) => {
         res.status(500).send({error: e});
     }
 });
+
 module.exports = router;

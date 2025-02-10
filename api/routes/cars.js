@@ -10,7 +10,6 @@ router.get("/", isDatabaseConnected, auth,async (req,res,next)=>{
         res.status(200).send(replay)
     }
     catch(e){
-        console.log("ksibidi");
         return res.status(500).send({"error":"skibidi"})
     }
     finally {

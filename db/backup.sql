@@ -76,6 +76,51 @@ ALTER SEQUENCE public.cars_id_seq OWNED BY public.cars.id;
 
 
 --
+-- Name: orders; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.orders (
+    orderid integer NOT NULL,
+    userid integer,
+    carid integer,
+    begin_latitude double precision,
+    begin_longitude double precision,
+    end_latitude double precision,
+    end_longitude double precision,
+    distance double precision,
+    status boolean DEFAULT true,
+    begin_date text,
+    end_date text,
+    price_per_km double precision,
+    price double precision
+);
+
+
+ALTER TABLE public.orders OWNER TO root;
+
+--
+-- Name: orders_orderid_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.orders_orderid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.orders_orderid_seq OWNER TO root;
+
+--
+-- Name: orders_orderid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.orders_orderid_seq OWNED BY public.orders.orderid;
+
+
+--
 -- Name: regions; Type: TABLE; Schema: public; Owner: root
 --
 
@@ -109,6 +154,42 @@ ALTER SEQUENCE public.regions_regionid_seq OWNER TO root;
 --
 
 ALTER SEQUENCE public.regions_regionid_seq OWNED BY public.regions.regionid;
+
+
+--
+-- Name: tokens; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.tokens (
+    tokenid integer NOT NULL,
+    userid integer,
+    issue_time text,
+    expiration_time text
+);
+
+
+ALTER TABLE public.tokens OWNER TO root;
+
+--
+-- Name: tokens_tokenid_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.tokens_tokenid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.tokens_tokenid_seq OWNER TO root;
+
+--
+-- Name: tokens_tokenid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.tokens_tokenid_seq OWNED BY public.tokens.tokenid;
 
 
 --
@@ -157,10 +238,24 @@ ALTER TABLE ONLY public.cars ALTER COLUMN id SET DEFAULT nextval('public.cars_id
 
 
 --
+-- Name: orders orderid; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN orderid SET DEFAULT nextval('public.orders_orderid_seq'::regclass);
+
+
+--
 -- Name: regions regionid; Type: DEFAULT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.regions ALTER COLUMN regionid SET DEFAULT nextval('public.regions_regionid_seq'::regclass);
+
+
+--
+-- Name: tokens tokenid; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.tokens ALTER COLUMN tokenid SET DEFAULT nextval('public.tokens_tokenid_seq'::regclass);
 
 
 --
@@ -182,12 +277,31 @@ COPY public.cars (id, model, manufacturer, img, latitude, longitude, range, avai
 
 
 --
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.orders (orderid, userid, carid, begin_latitude, begin_longitude, end_latitude, end_longitude,distance, status, begin_date,end_date,price_per_km, price) FROM stdin;
+\.
+
+
+--
 -- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: root
 --
 
 COPY public.regions (regionid, carids, latitude, longitude) FROM stdin;
 1	{1,2}	54.34	18.638306
 2	{3}	54.518328	18.529379
+\.
+
+
+--
+-- Data for Name: tokens; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.tokens (tokenid, userid, issue_time, expiration_time) FROM stdin;
+1	\N	1739003385059	1739003457059
+2	\N	1739003426403	1739003498403
+21	0	1739195581440	1739202781440
 \.
 
 
@@ -209,10 +323,24 @@ SELECT pg_catalog.setval('public.cars_id_seq', 1, false);
 
 
 --
+-- Name: orders_orderid_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.orders_orderid_seq', 1, false);
+
+
+--
 -- Name: regions_regionid_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
 SELECT pg_catalog.setval('public.regions_regionid_seq', 1, false);
+
+
+--
+-- Name: tokens_tokenid_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.tokens_tokenid_seq', 21, true);
 
 
 --
@@ -239,11 +367,27 @@ ALTER TABLE ONLY public.cars
 
 
 --
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (orderid);
+
+
+--
 -- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
 --
 
 ALTER TABLE ONLY public.regions
     ADD CONSTRAINT regions_pkey PRIMARY KEY (regionid);
+
+
+--
+-- Name: tokens tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.tokens
+    ADD CONSTRAINT tokens_pkey PRIMARY KEY (tokenid);
 
 
 --
