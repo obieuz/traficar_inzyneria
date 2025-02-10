@@ -1,5 +1,5 @@
 const {pool} = require("../db_connection");
-const {verifyToken} = require("../assets");
+const {verifyToken} = require("../token_methods");
 async function auth(req,res,next) {
     let token_string = req.headers["authorization"];
 
