@@ -16,4 +16,16 @@ router.get("/",isDatabaseConnected,auth,(req,res,next)=>{
     })
 });
 
+router.get("/:id",isDatabaseConnected,auth,(req,res,next)=>{
+    const id = req.params.id;
+    pool.query("SELECT * FROM regions WHERE region_id=$1;",[id],(err,response)=>{
+        if(err) {
+            return res.status(404).json(err);
+        }
+        return res.status(200).send({
+            rowCount:response.rowCount,
+            result:response.rows
+        });
+})});
+
 module.exports = router;
