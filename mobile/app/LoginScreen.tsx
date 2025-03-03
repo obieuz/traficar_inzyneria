@@ -7,21 +7,18 @@ import {token_key} from "@/functions/keys";
 import {laptop_ip_v4} from "@/assets/constants";
 import {getData, storeData} from "@/functions/storage";
 
-async function doesTokenExist(){
-    let token = await getData(token_key);
-    return token != null;
-
-}
-
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
 
     useEffect(() => {
-        if(doesTokenExist()){
-            router.push(MapScreen_route);
-        }
+        (async () => {
+            let token = await getData(token_key);
+            if(token != null && token != "not valid"){
+                router.push(MapScreen_route);
+            }
+        });
     }, []);
 
 
@@ -43,6 +40,7 @@ const LoginScreen = () => {
             />
             <TouchableOpacity style={styles.submitButton} onPress={
                 async () => {
+                    console.log("logowanie")
                     let response = await fetch("http://"+laptop_ip_v4+":3000/users/token",{
                         method:"POST",
                         body:JSON.stringify({
