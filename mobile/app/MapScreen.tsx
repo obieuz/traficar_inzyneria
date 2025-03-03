@@ -13,6 +13,7 @@ import {getData} from "@/functions/storage";
 import {token_key} from "@/functions/keys";
 import {LoginScreen_route} from "@/assets/routes";
 import useRegions from "@/hooks/useRegions";
+import useCars from "@/hooks/useCars";
 
 async function getToken(){
     return await getData(token_key);
@@ -26,7 +27,7 @@ export default function MapScreen() {
     const[showMenu, setShowMenu]=useState<boolean>(false);
     const[zoomLevel,setZoomLevel]=useState<number>(0);
     let regions = useRegions();
-    const[cars,setCars]=useState<Car[]>([]);
+    let cars = useCars();
 
     const [region, setRegion] = useState({
         //kordy lacznosci jako poczatkowe
@@ -109,12 +110,14 @@ export default function MapScreen() {
 
 
                 {/*dla kazdego samochodu tworzy sie Marker czyli znacznik na mapie*/}
-                {zoomLevel >= zoomLevel_barrier && cars.map((car:Car) => {
+                {( cars && zoomLevel >= zoomLevel_barrier) && cars.map((car) => {
+                    console.log(car);
+                    let img = require("../assets/images/cars/audi_rs6.png");
                     return <Marker
                         key={car.id}
                         coordinate={{
-                            latitude: Number(car.latitude),
-                            longitude: Number(car.longitude),
+                            latitude: parseFloat(car.latitude),
+                            longitude: parseFloat(car.longitude),
                         }}
                         title={`${car.manufacturer} ${car.model}`}
                         onPress={()=>{
@@ -123,7 +126,7 @@ export default function MapScreen() {
                             setShowDetails(true)
                         }}
                     >
-                        <Image source={car.img} style={{width: 32, height: 32}}/>
+                        <Image source={img} style={{width: 32, height: 32}}/>
                     </Marker>
                 })}
 
