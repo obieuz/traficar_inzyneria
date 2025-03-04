@@ -1,5 +1,4 @@
 import {View, Text, Image, StyleSheet, Button, TouchableOpacity} from "react-native";
-import {cars} from "@/assets/data";
 import {background_color, secondary_color} from "@/assets/colors";
 import {useRouter} from "expo-router";
 import {Clickable_Icon} from "@/components/Clickable_Icon";
@@ -9,15 +8,17 @@ import {faCoins} from "@fortawesome/free-solid-svg-icons";
 import {HorizontalLine} from "@/components/HorizontalLine";
 import {PowerIcon} from "@/components/SVG/PowerIcon";
 import {MileageIcon} from "@/components/SVG/MileageIcon";
+import {useStore} from "@/assets/store";
 
 export default function CarBasicInfo({carId})
 {
     const router = useRouter();
+    const {cars} = useStore();
     const car = cars.find(car => car.id === Number(carId));
     return (
         <View style={styles.component}>
             {car && <View>
-                <Image source={car?.img} style={styles.image}/>
+                <Image source={{uri:car.img}} style={styles.image}/>
                 <Text style={styles.header}>
                     {car?.manufacturer} {car?.model}
                 </Text>

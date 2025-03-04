@@ -5,9 +5,11 @@ import {laptop_ip_v4} from "@/assets/constants";
 import {useRouter} from "expo-router";
 import {LoginScreen_route} from "@/assets/routes";
 import {Car} from "@/assets/types";
+import {useStore} from "@/assets/store";
 
 export default function useCars() {
     let router = useRouter();
+    const {setStoreCars} = useStore();
     const [cars, setCars] = useState<Car[]>([]);
     useEffect(() => {
         (async () => {
@@ -25,12 +27,12 @@ export default function useCars() {
                 router.push(LoginScreen_route);
                 return;
             }
-            console.log(cars_from_request)
-            if(cars_from_request.result == null) {
+            let result = cars_from_request.result;
+            if(result == null) {
                 return;
             }
-            console.log(cars_from_request.result);
-            setCars(cars_from_request.result);
+            setCars(result);
+            setStoreCars(result)
         })();
     }, []);
     return cars;

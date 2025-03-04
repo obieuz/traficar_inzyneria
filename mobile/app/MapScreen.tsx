@@ -111,8 +111,6 @@ export default function MapScreen() {
 
                 {/*dla kazdego samochodu tworzy sie Marker czyli znacznik na mapie*/}
                 {( cars && zoomLevel >= zoomLevel_barrier) && cars.map((car) => {
-                    console.log(car);
-                    let img = require("../assets/images/cars/audi_rs6.png");
                     return <Marker
                         key={car.id}
                         coordinate={{
@@ -126,7 +124,7 @@ export default function MapScreen() {
                             setShowDetails(true)
                         }}
                     >
-                        <Image source={img} style={{width: 32, height: 32}}/>
+                        <Image source={{uri:car.img}} style={{width: 32, height: 32}}/>
                     </Marker>
                 })}
 

@@ -1,5 +1,4 @@
 import {View, Text, Image, StyleSheet, ScrollView, Button, TouchableOpacity} from "react-native";
-import {cars} from "@/assets/data";
 import {useLocalSearchParams, useSearchParams} from "expo-router/build/hooks";
 import {useRouter} from "expo-router";
 import MapView, {Marker} from "react-native-maps";
@@ -17,11 +16,16 @@ import {GearBoxIcon} from "@/components/SVG/GearBoxIcon";
 import {PowerIcon} from "@/components/SVG/PowerIcon";
 import {YearIcon} from "@/components/SVG/YearIcon";
 import {CubicCapacityIcon} from "@/components/SVG/CubicCapacityIcon";
+import {useStore} from "@/assets/store";
+import {laptop_ip_v4} from "@/assets/constants";
+
 
 export default function CarDetailsScreen() {
+    const {cars} = useStore();
     const {carId} = useLocalSearchParams();
     const car = cars.find(car => car.id === Number(carId));
     const [location, setLocation] = useState(null);
+    const [image,setImage] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -58,7 +62,9 @@ return (
                     }}
                     title={`${car.manufacturer} ${car.model}`}
                 >
-                    <Image source={car?.img} style={{width: 32, height: 32}}/>
+                    <Image source={{
+                        uri:car.img
+                    }} style={{width: 32, height: 32}}/>
                 </Marker>
 
                 {location && <UserMarker
@@ -68,7 +74,9 @@ return (
 
             </MapView>}
             <View style={styles.container}>
-                <Image source={car?.img} style={styles.image}/>
+                <Image source={{
+                    uri:car.img
+                }} style={styles.image}/>
                 <Text style={styles.header}>
                     {car?.manufacturer} {car?.model}
                 </Text>
