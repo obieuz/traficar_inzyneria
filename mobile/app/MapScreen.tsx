@@ -1,6 +1,5 @@
-import {Car} from "@/assets/types";
+import {Car, Region} from "@/assets/types";
 import {StyleSheet, View, Image, Text, TouchableOpacity} from "react-native";
-import {cars, regions} from "@/assets/data";
 import {useRouter} from "expo-router";
 import MapView, {Marker} from "react-native-maps";
 import useUserLocation from "@/hooks/useUserLocation";
@@ -9,9 +8,16 @@ import CarBasicInfo from "@/components/CarBasicInfo";
 import {Clickable_Icon} from "@/components/Clickable_Icon";
 import {MenuBar} from "@/components/MenuBar";
 import {UserMarker} from "@/components/UserMarker";
-import {zoomLevel_barrier} from "@/assets/constants";
+import {laptop_ip_v4, zoomLevel_barrier} from "@/assets/constants";
+import {getData} from "@/functions/storage";
+import {token_key} from "@/functions/keys";
+import {LoginScreen_route} from "@/assets/routes";
+import useRegions from "@/hooks/useRegions";
+import useCars from "@/hooks/useCars";
 
-
+async function getToken(){
+    return await getData(token_key);
+}
 
 export default function MapScreen() {
     let router = useRouter();
@@ -20,7 +26,8 @@ export default function MapScreen() {
     const[showDetails, setShowDetails]=useState<boolean>(false);
     const[showMenu, setShowMenu]=useState<boolean>(false);
     const[zoomLevel,setZoomLevel]=useState<number>(0);
-
+    let regions = useRegions();
+    let cars = useCars();
 
     const [region, setRegion] = useState({
         //kordy lacznosci jako poczatkowe
@@ -76,7 +83,7 @@ export default function MapScreen() {
                     setShowDetails(false);
                     }
                 }
-                onRegionChangeComplete={(region) => {
+                onRegionChangeComplete={async (region) => {
                     setZoomLevel(calculateZoomLevel(region.latitudeDelta));
                 }}
             >
@@ -87,27 +94,28 @@ export default function MapScreen() {
                 />
                 }
 
-                {zoomLevel < zoomLevel_barrier && regions.map((region) => {
+                { (regions && zoomLevel < zoomLevel_barrier) && regions.map((reg) => {
                     return <Marker
-                        key={region.id}
+                        key={reg.regionid}
                         coordinate={{
-                            latitude: region.latitude,
-                            longitude: region.longitude,
+                            latitude: parseFloat(reg.latitude),
+                            longitude: parseFloat(reg.longitude),
                         }}
                     >
                         <View style={licznik_style.container}>
-                            <Text style={licznik_style.text}>{region.carIds.length}</Text>
+                            <Text style={licznik_style.text}>{reg.carids.length}</Text>
                         </View>
                     </Marker>
                 })}
 
+
                 {/*dla kazdego samochodu tworzy sie Marker czyli znacznik na mapie*/}
-                {zoomLevel >= zoomLevel_barrier && cars.map((car:Car) => {
+                {( cars && zoomLevel >= zoomLevel_barrier) && cars.map((car) => {
                     return <Marker
                         key={car.id}
                         coordinate={{
-                            latitude: Number(car.latitude),
-                            longitude: Number(car.longitude),
+                            latitude: parseFloat(car.latitude),
+                            longitude: parseFloat(car.longitude),
                         }}
                         title={`${car.manufacturer} ${car.model}`}
                         onPress={()=>{
@@ -116,7 +124,7 @@ export default function MapScreen() {
                             setShowDetails(true)
                         }}
                     >
-                        <Image source={car.img} style={{width: 32, height: 32}}/>
+                        <Image source={{uri:car.img}} style={{width: 32, height: 32}}/>
                     </Marker>
                 })}
 
