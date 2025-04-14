@@ -3,6 +3,7 @@ let router = express.Router();
 const isDatabaseConnected = require("../middlewares/isDatabaseConnected")
 const auth = require("../middlewares/auth")
 const {pool} = require("../db_connection")
+const clientRealase = require("../middlewares/clientRealase");
 
 router.get("/",isDatabaseConnected,auth,async (req,res,next)=>{
     await pool.query("SELECT * FROM regions;",(err,response)=>{
@@ -14,7 +15,7 @@ router.get("/",isDatabaseConnected,auth,async (req,res,next)=>{
             result:response.rows
         });
     })
-});
+},clientRealase);
 
 router.get("/:id",isDatabaseConnected,auth,async (req,res,next)=>{
     const id = req.params.id;
@@ -37,6 +38,6 @@ router.get("/:id",isDatabaseConnected,auth,async (req,res,next)=>{
                     result:cars
                 });
         });
-});
+},clientRealase);
 
 module.exports = router;

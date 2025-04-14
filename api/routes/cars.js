@@ -3,7 +3,7 @@ let router = express.Router();
 let {pool} = require("../db_connection");
 let auth = require("../middlewares/auth");
 let isDatabaseConnected = require("../middlewares/isDatabaseConnected");
-
+let clientRealase = require("../middlewares/clientRealase");
 router.get("/", isDatabaseConnected, auth,async (req,res,next)=>{
     try {
         let replay = await pool.query("select * from cars;");
@@ -15,9 +15,6 @@ router.get("/", isDatabaseConnected, auth,async (req,res,next)=>{
             catch(e){
         return res.status(500).send({"error":"skibidi"})
     }
-    finally {
-        pool.end();
-    }
-})
+},clientRealase)
 
 module.exports = router;

@@ -6,6 +6,7 @@ async function isDatabaseConnected(req,res,next) {
         next();
     }
     catch (e) {
+        pool.end();
         return res.status(500).send({error:"Couldnt connect to db"})
     }
 }

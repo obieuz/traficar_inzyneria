@@ -4,6 +4,7 @@ const isDatabaseConnected = require("../middlewares/isDatabaseConnected")
 const auth = require("../middlewares/auth")
 const {pool} = require("../db_connection")
 const {verifyToken} = require("../token_methods");
+const clientRealase = require("../middlewares/clientRealase");
 
 //get orderow dla usera
 router.get("/user/",isDatabaseConnected,auth,async (req,res,next)=>{
@@ -19,7 +20,7 @@ router.get("/user/",isDatabaseConnected,auth,async (req,res,next)=>{
             result:response.rows
         })
     });
-});
+},clientRealase);
 
 router.post("/", isDatabaseConnected, auth,async (req,res,next)=>{
     const userId = await verifyToken(req.headers['authorization']).then(data=>data.userId);
@@ -46,7 +47,7 @@ router.post("/", isDatabaseConnected, auth,async (req,res,next)=>{
         return res.status(201).send({});
 
     });
-});
+},clientRealase);
 
 router.put("/",isDatabaseConnected,auth,async (req,res,next)=>{
     const {orderId,distance,price_per_km,end_localization} = req.body;
@@ -67,6 +68,6 @@ router.put("/",isDatabaseConnected,auth,async (req,res,next)=>{
        return res.status(200).send({});
     });
 
-});
+},clientRealase);
 
 module.exports = router;
